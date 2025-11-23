@@ -1,6 +1,11 @@
 ### Escuela Colombiana de Ingeniería
 ### Arquitecturas de Software - ARSW
 
+## Miembros:
+
+* Andres Felipe Calderon Ramirez
+* Jose David Castillo
+
 ## Escalamiento en Azure con Maquinas Virtuales, Sacale Sets y Service Plans
 
 ### Dependencias
@@ -90,9 +95,28 @@ Solucion:
 **Preguntas**
 
 * ¿Qué es un Azure Function?
+
+Es una solucion sin servidor que permite escribir menos codigo, amentener menos infraestructura y ahorrar costos.
+Proporciona varios recursos actualizados para mantener las aplicaciones en ejecucion, asi uno solo se preocupa con el
+codigo y su lenguaje y el Azure Function se va a encargar del resto.
+
 * ¿Qué es serverless?
+
+Significa sin servidor, es una solucion que permite crear y ejecutar aplicaciones con rapidez y menor costo
+total de propiedad, ya que no es necesario aprovisionar y administrar infraestructura.
+
+Con esto nos dejamos de preocupar por el gasto de recursos, administracion de servidores y sistemas operativos
+y nos preocupamos solo por el codigo de la aplicacion.
+
 * ¿Qué es el runtime y que implica seleccionarlo al momento de crear el Function App?
+
+Es el entorno de ejecucion que da los servicios y recursos necesarios para ejecutar el codigo.
+El runtime se encarga de determinar el lenguaje de progranacion, version y entorno en el quue se ejecutaa el codigo.
+
 * ¿Por qué es necesario crear un Storage Account de la mano de un Function App?
+
+Es necesario para el almacenamiento de archivos de la aplicación, los disparadores y enlaces, el escalado y durabilidad y los registros de ejecuciones de funciones
+
 * ¿Cuáles son los tipos de planes para un Function App?, ¿En qué se diferencias?, mencione ventajas y desventajas de cada uno de ellos.
 * ¿Por qué la memoization falla o no funciona de forma correcta?
 * ¿Cómo funciona el sistema de facturación de las Function App?
