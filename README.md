@@ -88,9 +88,54 @@ Solucion:
 
 5. Modifique la coleción de POSTMAN con NEWMAN de tal forma que pueda enviar 10 peticiones concurrentes. Verifique los resultados y presente un informe.
 
+Esto se hizo a travez del comando "newman run collection.fibnacci.json" y para la concurrencia "newman run collection.fibnacci.json -n 10"
 
+![](/images/solution/5-1.png)
+![](/images/solution/5-10.png)
 
 6. Cree una nueva Function que resuleva el problema de Fibonacci pero esta vez utilice un enfoque recursivo con memoization. Pruebe la función varias veces, después no haga nada por al menos 5 minutos. Pruebe la función de nuevo con los valores anteriores. ¿Cuál es el comportamiento?.
+
+Esto se hizo cambiando el index y redesplegando
+
+```
+module.exports = async function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
+
+    const nth = req.body.nth;
+
+    if (nth < 0) {
+        return context.res = {
+            status: 400,
+            body: "nth debe ser >= 0"
+        };
+    }
+
+    const memo = {};
+
+    function fib(n) {
+        if (memo[n] !== undefined) return memo[n];
+        if (n === 0) return 0;
+        if (n === 1) return 1;
+
+        memo[n] = fib(n - 1) + fib(n - 2);
+        return memo[n];
+    }
+
+    const result = fib(nth);
+
+    context.res = {
+        body: result.toString()
+    };
+};
+```
+
+Valores primera prueba
+![](/images/solution/6.1-1.png)
+![](/images/solution/6.1-10.png)
+Valores despues de 5 minutos
+![](/images/solution/6.2-1.png)
+![](/images/solution/6.2-10.png)
+
 
 **Preguntas**
 
@@ -118,6 +163,30 @@ El runtime se encarga de determinar el lenguaje de progranacion, version y entor
 Es necesario para el almacenamiento de archivos de la aplicación, los disparadores y enlaces, el escalado y durabilidad y los registros de ejecuciones de funciones
 
 * ¿Cuáles son los tipos de planes para un Function App?, ¿En qué se diferencias?, mencione ventajas y desventajas de cada uno de ellos.
+
+
+
+| Plan            | Escalabilidad | Pago          | Cold Start | Uso recomendado                |
+| --------------- | ------------- | ------------- | ---------- | ------------------------------ |
+| **Consumption** | Automática    | Por ejecución | Sí         | Tráfico variable, barato       |
+| **Premium**     | Automática    | Por instancia | No         | Apps críticas, cargas pesadas  |
+| **Dedicated**   | Manual        | Mensual fijo  | No         | Apps existentes en App Service |
+
+
 * ¿Por qué la memoization falla o no funciona de forma correcta?
+
+Las Azure Functions son stateless. Esto significa:
+
+La variable memo = {} solo existe durante la ejecución, cuando termina la ejecución, se pierde en memoria.
+
+Por esto mismo no recuerda resultados anteriores.
+
 * ¿Cómo funciona el sistema de facturación de las Function App?
-* Informe
+
+Esto depende del plan:
+
+| Plan            | ¿Cuándo pagas?                  | ¿Cobro por ejecución? |
+| --------------- | ------------------------------- | --------------------- |
+| **Consumption** | Solo cuando usas                | Sí                    |
+| **Premium**     | Por instancias reservadas + uso | Sí                    |
+| **Dedicated**   | Pago mensual fijo               | No                    |
